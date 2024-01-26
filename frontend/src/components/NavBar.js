@@ -10,7 +10,7 @@ const NavBar = () => {
             href="#link1"
             className="block p-2.5 border-b border-gray-300 hover:bg-gray-100"
           >
-            노원이
+            강북이
           </a>
         </li>
         <li>

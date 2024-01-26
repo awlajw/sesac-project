@@ -51,7 +51,7 @@ def create_context(question, df, max_len=3000):
     return "\n\n===\n\n".join(context_parts)
 
 
-def answer_question(question, df, max_len=3000, debug=False):
+def answer_question(question, df, max_len=2000, debug=False):
     context = create_context(question, df, max_len=max_len)
     if debug:
         print("Context:\n" + context)
@@ -66,10 +66,10 @@ def answer_question(question, df, max_len=3000, debug=False):
                 },
                 {
                     "role": "user",
-                    "content": f"Context: {context}\n\n---\n\n Question: {question}, 한국어로 번역해서 대답해줘.",
+                    "content": f"Context: {context}\n\n---\n\n Question: {question}.",
                 },
             ],
-            temperature=0,
+            temperature=0.7,
         )
         return response.choices[0].message.content
     except Exception as e:
@@ -88,7 +88,7 @@ async def chat(input_data: ChatInput):
     if user_input is None:
         return {"message": "입력된 메시지가 없습니다."}
 
-    response = answer_question(user_input, df, debug=True)
+    response = answer_question(user_input, df)
     return {"User": user_input, "도봉이": response}
 
 
